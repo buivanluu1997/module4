@@ -21,4 +21,9 @@ public class CustomerRepository implements ICustomerRepository{
     public List<Customer> findAll() {
         return customerList;
     }
+
+    @Override
+    public void addCustomer(Customer customer) {
+        customerList.add(customer);
+    }
 }

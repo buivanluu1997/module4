@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>Danh sách khách hàng</h1>
+<a href="customers/add">Them khach hang</a>
+<p style="color: blue">${message}</p>
 <table border="1">
   <tr>
     <th>Id</th>

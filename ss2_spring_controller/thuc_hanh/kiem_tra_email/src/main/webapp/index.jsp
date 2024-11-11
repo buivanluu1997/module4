@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>EmailValidation</title>
 </head>
 <body>
-<c:redirect url="customers"/>
+<c:redirect url="home"/>
 </body>
 </html>
