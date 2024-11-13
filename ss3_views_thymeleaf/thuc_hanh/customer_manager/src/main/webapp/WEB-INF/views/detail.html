@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<h2>Chi tiết khách hàng</h2>
+<label>Id:</label>
+<label th:text="${customer.id}"></label><br>
+<label>Tên:</label>
+<label th:text="${customer.name}"></label><br>
+<label>Email:</label>
+<label th:text="${customer.email}"></label><br>
+<label>Địa chỉ:</label>
+<label th:text="${customer.address}"></label>
+</body>
+</html>

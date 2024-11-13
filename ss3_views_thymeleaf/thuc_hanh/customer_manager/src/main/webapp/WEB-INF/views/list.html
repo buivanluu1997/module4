@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách khách hàng</title>
+</head>
+<body>
+<h1>Danh Sách Khách Hàng</h1>
+<p><a th:href="@{/customer/create}">Thêm khách hàng</a></p>
+<table border="1">
+  <tr>
+    <th>Stt</th>
+    <th>Id</th>
+    <th>Tên</th>
+    <th>Email</th>
+    <th>Địa chỉ</th>
+    <th>Xoá</th>
+    <th>Sửa</th>
+    <th>Chi tiết</th>
+  </tr>
+  <tr th:each="customer, status: ${customers} ">
+    <td th:text="${status.count}"></td>
+    <td th:text="${customer.id}"></td>
+    <td th:text="${customer.name}"></td>
+    <td th:text="${customer.email}"></td>
+    <td th:text="${customer.address}"></td>
+    <td><a th:href="@{/customer/delete(id=${customer.id})}">Xoá</a></td>
+    <td><a th:href="@{/customer/update(id=${customer.id})}">Sửa</a></td>
+    <td><a th:href="@{/customer/detail(id=${customer.id})}">Chi tiết</a></td>
+  </tr>
+</table>
+<p th:text="${message}"></p>
+<p th:text="${delete}"></p>
+<p th:text="${update}"></p>
+</body>
+</html>

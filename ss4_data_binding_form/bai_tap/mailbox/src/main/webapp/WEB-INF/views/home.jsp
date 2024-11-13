@@ -27,9 +27,10 @@
     <label>Spams Filter:</label>
     <form:checkbox path="spamsFilter"/> Enable spams filter <br>
     <label>Signature:</label>
-    <form:textarea path="signature" rows="4" cols="35" /> <br>
+    <form:textarea path="signature" rows="4" cols="35"/> <br>
     <button type="submit">Update</button>
     <button type="reset">Cancel</button>
 </form:form>
 </body>
 </html>
+ 
