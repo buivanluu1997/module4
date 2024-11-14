@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>List</title>
-
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
 </head>
 <body>
-
+<th:block th:replace="~{/layout/layout::header}"></th:block>
 <h1>Danh sách sản phẩm</h1>
 <form action="/product/searchName" method="post">
     <input type="text" name="name" placeholder="Tên sản phẩm">
     <input type="submit" value="Tìm kiếm">
 </form>
 <p><a href="/product/create">Thêm sản phẩm</a></p>
-<table border="1">
+<table class="table table-striped table-bordered table-hover table-responsive">
     <tr>
         <th>Stt</th>
         <th>Id</th>
@@ -39,8 +39,9 @@
 <p th:text="${delete}"></p>
 <p th:text="${update}"></p>
 
+
 <th:block th:if="${!productList.isEmpty()}">
-    <table border="1">
+    <table class="table table-striped table-bordered table-hover table-responsive">
         <tr>
             <th>Stt</th>
             <th>Id</th>
@@ -60,6 +61,6 @@
 <th:block th:if="${productList.isEmpty()}">
     <p>Tên sản phẩm không tìm thấy</p>
 </th:block>
-
+<th:block th:replace="~{/layout/layout::footer}"></th:block>
 </body>
 </html>
