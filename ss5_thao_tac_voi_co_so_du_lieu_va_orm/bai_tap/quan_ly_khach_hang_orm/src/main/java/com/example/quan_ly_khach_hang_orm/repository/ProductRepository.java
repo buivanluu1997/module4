@@ -54,7 +54,6 @@ public class ProductRepository implements IProductRepository{
         TypedQuery<Product> query = entityManager.createQuery(searchName, Product.class);
         query.setParameter("name", "%" + name + "%");
         List<Product> products = query.getResultList();
-        System.out.println(products.size());
         return products;
     }
 }
