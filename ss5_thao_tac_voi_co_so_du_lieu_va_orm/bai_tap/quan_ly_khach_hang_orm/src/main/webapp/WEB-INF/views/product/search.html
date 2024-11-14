@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm sản phẩm</title>
+</head>
+<body>
+<h1>Tìm sản phẩm</h1>
+<th:block>
+    <div th:if="${!productList.isEmpty()}">
+        <table border="1">
+            <tr>
+                <th>Stt</th>
+                <th>Id</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Nhà sản xuất</th>
+            </tr>
+            <tr th:each="pro, sta : ${productList}">
+                <td th:text="${sta.count}"></td>
+                <td th:text="${pro.id}"></td>
+                <td th:text="${pro.name}"></td>
+                <td th:text="${pro.price}"></td>
+                <td th:text="${pro.manufacturer}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${productList.isEmpty()}">
+        <p>Sản phẩm không tồn tại</p>
+    </div>
+</th:block>
+<p><a href="/product">Quay lại trang chủ</a></p>
+</body>
+</html>

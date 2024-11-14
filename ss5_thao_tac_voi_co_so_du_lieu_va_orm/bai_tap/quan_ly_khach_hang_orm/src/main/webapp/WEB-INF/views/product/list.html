@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h1>Danh Sách Sản Phẩm</h1>
+
+<form action="/product/searchName" method="post">
+    <input type="text" name="name" placeholder="Tên sản phẩm">
+    <input type="submit" value="Tìm kiếm">
+</form>
+
+<p><a href="/product/create">Thêm sản phẩm</a></p>
+<table border="1">
+    <tr>
+        <th>Stt</th>
+        <th>Id</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Nhà sản xuất</th>
+        <th>Xoá</th>
+        <th>Sửa</th>
+        <th>Chi tiết</th>
+    </tr>
+    <tr th:each="product, status : ${products}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.manufacturer}"></td>
+        <td><a th:href="@{/product/delete(id=${product.id})}">Xoá</a></td>
+        <td><a th:href="@{/product/update(id=${product.id})}">Sửa</a></td>
+        <td><a th:href="@{/product/detail(id=${product.id})}">Chi tiết</a></td>
+    </tr>
+    <tr th:if="${products.isEmpty()}" th:text="${'Danh sách rỗng'}"></tr>
+</table>
+<p th:text="${create}"></p>
+<p th:text="${delete}"></p>
+<p th:text="${update}"></p>
+
+</body>
+</html>
