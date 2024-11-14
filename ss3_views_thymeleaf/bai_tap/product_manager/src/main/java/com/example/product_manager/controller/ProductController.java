@@ -2,7 +2,6 @@ package com.example.product_manager.controller;
 
 import com.example.product_manager.model.Product;
 import com.example.product_manager.service.IProductService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +19,13 @@ public class ProductController {
     @GetMapping("")
     public String customerList(Model model) {
         model.addAttribute("products", productService.findAll());
-        return "list";
+        return "product/list";
     }
 
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("product", new Product());
-        return "create";
+        return "product/create";
     }
 
     @PostMapping("/create")
@@ -47,7 +46,7 @@ public class ProductController {
     public String updateForm(@RequestParam int id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "update";
+        return "product/update";
     }
 
     @PostMapping("/update")
@@ -60,13 +59,13 @@ public class ProductController {
     @GetMapping("/detail")
     public String detailForm(@RequestParam int id, Model model){
         model.addAttribute("product", productService.findById(id));
-        return "detail";
+        return "product/detail";
     }
 
     @PostMapping("/searchName")
     public String searchName(@RequestParam String name, Model model){
         List<Product> productList = productService.searchName(name);
         model.addAttribute("productList", productList);
-        return "list";
+        return "product/list";
     }
 }
