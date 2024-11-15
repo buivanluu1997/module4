@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/blog/update" method="post" th:object="${blog}">
+    <input type="hidden" th:field="*{id}">
+    <label>Tiêu đề:</label>
+    <input th:field="*{title}"><br>
+    <label>Nội dung:</label>
+    <input th:field="*{content}"><br>
+    <label>Tác giả:</label>
+    <input th:field="*{author}"><br>
+    <input type="submit" value="Cập nhật">
+</form>
+</body>
+</html>
