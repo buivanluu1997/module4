@@ -26,10 +26,11 @@ public class PostController {
 
     @GetMapping("")
     public String search(@RequestParam(required = false, defaultValue = "0") int page,
+                         @RequestParam(required = false, defaultValue = "3") int size,
                          @RequestParam(required = false, defaultValue = "") String searchTitle,
                          Model model) {
         Sort sort = Sort.by(Sort.Direction.ASC, "title").and(Sort.by( "createdAt"));
-        Pageable pageable = PageRequest.of(page, 3, sort);
+        Pageable pageable = PageRequest.of(page, size, sort);
         Page<Post> postPage = postService.findByTitleContaining(searchTitle, pageable);
         model.addAttribute("postPage", postPage);
         model.addAttribute("searchTitle", searchTitle);
@@ -70,8 +71,6 @@ public class PostController {
         redirectAttributes.addFlashAttribute("updatePost", "Đã cập nhật thành công");
         return "redirect:/post";
     }
-
-
 
 
 

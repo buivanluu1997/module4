@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cập nhật danh mục</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
 </head>
 <body>
 <form action="/post/updateCategory" method="post" th:object="${category}">

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>List</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
 </head>
 <body>
 <h1>Danh sách Blog và danh mục</h1>
 <p><a href="/post/createCategory">Tạo danh mục mới</a></p>
-<table border="1">
+<table class="table table-striped table-bordered table-hover">
     <tr>
         <th>Stt</th>
         <th>Id</th>
