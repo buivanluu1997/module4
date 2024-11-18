@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách loại sản phẩm</title>
+  <th:block th:replace="~{/layout/layout::library}"></th:block>
+  <style>
+    .table-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    h1 {
+      text-align: center;
+      color: #343a40;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<th:block th:replace="~{/layout/layout::header}"></th:block>
+
+<div class="container table-container">
+  <h1>Danh Sách Loại Sản Phẩm</h1>
+  <table class="table table-bordered table-hover table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên Loại Sản Phẩm</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categoryList}">
+      <td th:text="${category.id}"></td>
+      <td th:text="${category.name}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<th:block th:replace="~{/layout/layout::footer}"></th:block>
+
+</body>
+</html>

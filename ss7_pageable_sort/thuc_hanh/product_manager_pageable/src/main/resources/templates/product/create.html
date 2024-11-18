@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #343a40;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="~{/layout/layout::header}"></th:block>
+
+<div class="container">
+    <div class="form-container">
+        <form action="/product/createProduct" method="post" th:object="${product}">
+            <h1>Thêm Sản Phẩm</h1>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Tên Sản Phẩm:</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nhập tên sản phẩm">
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá Sản Phẩm:</label>
+                <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Nhập giá sản phẩm">
+            </div>
+
+            <div class="mb-3">
+                <label for="manufacturer" class="form-label">Nhà Sản Xuất:</label>
+                <input type="text" th:field="*{manufacturer}" class="form-control" id="manufacturer" placeholder="Nhập nhà sản xuất">
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Loại Sản Phẩm:</label>
+                <select th:field="*{category.id}" class="form-select" id="category">
+                    <option th:each="category : ${categoryList}" th:text="${category.getName()}" th:value="${category.id}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Thêm</button>
+        </form>
+    </div>
+</div>
+
+<th:block th:replace="~{/layout/layout::footer}"></th:block>
+</body>
+</html>

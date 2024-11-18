@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach san pham</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+    <style>
+        .custom-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: #343a40; /* Màu đậm */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="~{/layout/layout::header}"></th:block>
+<div class="container mt-5">
+        <h1 class="text-center mb-4 custom-heading">Danh Sách Sản Phẩm</h1>
+        <!-- Nội dung bảng và phân trang ở đây -->
+    <div class="d-flex justify-content-between mb-3">
+        <a href="/product/createProduct" class="btn btn-primary">Thêm Sản Phẩm</a>
+        <a href="/product/listCategory" class="btn btn-secondary">Xem Danh Sách Loại Sản Phẩm</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>STT</th>
+            <th>ID</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Giá Sản Phẩm</th>
+            <th>Ngày Thêm Sản Phẩm</th>
+            <th>Nhà Sản Xuất</th>
+            <th>Loại Sản Phẩm</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, status : ${productPage}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${#temporals.format(product.createdAt, 'dd-MM-yyyy')}"></td>
+            <td th:text="${product.manufacturer}"></td>
+            <td th:text="${product.getCategory().getName()}"></td>
+            <td>
+                <a th:href="@{/product/delete(id=${product.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn xoá không?')">Xóa</a>
+            </td>
+            <td>
+                <a th:href="@{/product/update(id=${product.id})}" class="btn btn-warning btn-sm">Sửa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${message}" class="alert alert-info" th:text="${message}"></div>
+    <div th:if="${delete}" class="alert alert-success" th:text="${delete}"></div>
+    <div th:if="${update}" class="alert alert-success" th:text="${update}"></div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li th:classappend="${!productPage.hasPrevious()} ? 'disabled'" class="page-item">
+                <a th:href="@{/product(page=${productPage.number - 1})}" class="page-link">Trước</a>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link" th:text="${productPage.number + 1} + '/' + ${productPage.totalPages}"></span>
+            </li>
+            <li th:classappend="${!productPage.hasNext()} ? 'disabled'" class="page-item">
+                <a th:href="@{/product(page=${productPage.number + 1})}" class="page-link">Sau</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<th:block th:replace="~{/layout/layout::footer}"></th:block>
+</body>
+</html>
