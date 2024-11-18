@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<h1>Danh sách Blog và danh mục</h1>
+<p><a href="/post/createCategory">Tạo danh mục mới</a></p>
+<table border="1">
+    <tr>
+        <th>Stt</th>
+        <th>Id</th>
+        <th>Tên danh mục</th>
+        <th>Xoá</th>
+        <th>Chỉnh sửa</th>
+    </tr>
+    <tr th:each="category, status : ${listCategory}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td><a th:href="@{/post/deleteCategory(id=${category.id})}" onclick="return confirm('Bạn có muốn xoá không?')">Xoá</a></td>
+        <td><a th:href="@{/post/updateCategory(id=${category.id})}">Sửa</a></td>
+    </tr>
+</table>
+<p th:text="${createCate}"></p>
+<p th:text="${deleteCate}"></p>
+<p th:text="${updateCate}"></p>
+</body>
+</html>

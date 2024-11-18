@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm bài hát</title>
+</head>
+<body>
+<form action="/post/createPost" method="post" th:object="${post}">
+  <h1>Thêm bài hát</h1>
+  <label>Tiêu đề:</label>
+  <input th:field="*{title}"><br>
+  <label>Ngày tạo:</label>
+  <input type="date" th:field="*{createdAt}"><br>
+  <label>Tên danh mục:</label>
+  <label>
+    <select th:field="*{category.id}">
+      <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+    </select>
+  </label>
+  <input type="submit" value="Thêm">
+</form>
+</body>
+</html>

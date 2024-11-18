@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo danh mục mới</title>
+</head>
+<body>
+<form action="/post/createCategory" method="post" th:object="${category}">
+  <h1>Tạo danh mục mới</h1>
+  <label>Tên danh mục:</label>
+  <input th:field="*{name}">
+  <button type="submit">Tạo</button>
+</form>
+</body>
+</html>

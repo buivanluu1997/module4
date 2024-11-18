@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách post</title>
+</head>
+<body>
+<h1>Danh sách bài hát</h1>
+<p><a href="/post/createPost">Thêm bài hát</a></p>
+<p><a href="/post/listCategory">Xem danh mục</a></p>
+<form action="/post" method="get">
+    <input name="searchTitle" placeholder="Nhập tiêu đề" th:value="${searchTitle}">
+    <input type="submit" value="Tìm kiếm">
+</form>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Tiêu đề</th>
+        <th>Ngày tạo</th>
+        <th>Tên danh mục</th>
+        <th>Xoá</th>
+        <th>Sửa</th>
+    </tr>
+    <tr th:each="post, status : ${postPage.content}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${post.title}"></td>
+        <td th:text="${#temporals.format(post.createdAt, 'dd-MM-yyyy')}"></td>
+        <td th:text="${post.getCategory().getName()}"></td>
+        <td><a th:href="@{/post/deletePost(id=${post.id})}" onclick="return confirm('Bạn có muốn xoá không?')">Xoá</a></td>
+        <td><a th:href="@{/post/updatePost(id=${post.id})}">Sửa</a></td>
+    </tr>
+</table>
+<p th:text="${createPost}"></p>
+<p th:text="${deletePost}"></p>
+<p th:text="${updatePost}"></p>
+
+<a th:if="${postPage.hasPrevious()}" th:href="@{/post(page=${postPage.number - 1}, searchTitle=${searchTitle})}" >Trước</a>
+<span th:text="${postPage.number + 1}"></span>/<span th:text="${postPage.totalPages}"></span>
+<a th:if="${postPage.hasNext()}" th:href="@{/post(page=${postPage.number + 1}, searchTitle=${searchTitle})}" >Sau</a>
+</body>
+</html>
