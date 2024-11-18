@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
@@ -59,5 +61,12 @@ public class BlogController {
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("update", "Đã cập nhật Blog thành công");
         return "redirect:/blog";
+    }
+
+    @PostMapping("/searchAuthor")
+    public String searchAuthor(@RequestParam String searchAuthor, Model model) {
+        List<Blog> blogs = blogService.findByAuthor(searchAuthor);
+        model.addAttribute("blogs", blogs);
+        return "/blog/list";
     }
 }

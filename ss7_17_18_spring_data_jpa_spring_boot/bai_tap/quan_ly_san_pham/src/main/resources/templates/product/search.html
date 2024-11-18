@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Stt</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Delete</th>
+        <th>Edit</th>
+        <th>Detail</th>
+    </tr>
+    <tr th:each="product, status : ${products}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.quantity}"></td>
+    </tr>
+</table>
+</body>
+</html>

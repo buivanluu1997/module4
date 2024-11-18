@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
 </head>
-<body>
-<h2>Chi tết Blog</h2>
-<label>Id: </label>
-<label th:text="${blog.id}"></label><br>
-<label>Tiêu đề: </label>
-<label th:text="${blog.title}"></label><br>
-<label>Nội dung: </label>
-<label th:text="${blog.content}"></label><br>
-<label>Tác giả: </label>
-<label th:text="${blog.author}"></label><br>
-<p><a href="/blog">Quay lại trang chủ</a></p>
+<div class="container mt-5">
+    <h2 class="mb-4">Chi tiết Blog</h2>
+
+    <div class="mb-3">
+        <label for="id" class="form-label">Id: </label>
+        <span id="id" class="form-control-plaintext" th:text="${blog.id}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Tiêu đề: </label>
+        <span id="title" class="form-control-plaintext" th:text="${blog.title}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="content" class="form-label">Nội dung: </label>
+        <div id="content" class="form-control-plaintext" th:text="${blog.content}"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="author" class="form-label">Tác giả: </label>
+        <span id="author" class="form-control-plaintext" th:text="${blog.author}"></span>
+    </div>
+
+    <p><a href="/blog" class="btn btn-primary">Quay lại trang chủ</a></p>
+</div>
 </body>
 </html>

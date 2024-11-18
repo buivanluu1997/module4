@@ -35,5 +35,10 @@ public class BlogService implements IBlogService {
         blogRepository.save(blog);
     }
 
+    @Override
+    public List<Blog> findByAuthor(String author) {
+        return blogRepository.findByAuthor(author);
+    }
+
 
 }

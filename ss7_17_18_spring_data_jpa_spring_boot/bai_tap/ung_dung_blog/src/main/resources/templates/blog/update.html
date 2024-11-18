@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+
 </head>
 <body>
-<form action="/blog/update" method="post" th:object="${blog}">
-    <input type="hidden" th:field="*{id}">
-    <label>Tiêu đề:</label>
-    <input th:field="*{title}"><br>
-    <label>Nội dung:</label>
-    <input th:field="*{content}"><br>
-    <label>Tác giả:</label>
-    <input th:field="*{author}"><br>
-    <input type="submit" value="Cập nhật">
-</form>
+<div class="container mt-5">
+    <h2 class="mb-4">Cập nhật Blog</h2>
+    <form action="/blog/update" method="post" th:object="${blog}">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="title" class="form-label">Tiêu đề:</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Nội dung:</label>
+            <textarea class="form-control" id="content" rows="5" th:field="*{content}"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Tác giả:</label>
+            <input type="text" class="form-control" id="author" th:field="*{author}">
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+</div>
 </body>
 </html>

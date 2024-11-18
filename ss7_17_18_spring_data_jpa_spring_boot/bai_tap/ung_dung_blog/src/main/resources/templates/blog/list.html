@@ -3,32 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sach Blog</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
 </head>
 <body>
-<h1>Danh sách các Blog cá nhân</h1>
-<p><a href="/blog/create">Thêm Blog</a></p>
-<table border="1" th:if="${blogs != null}">
-    <tr>
-        <th>Stt</th>
-        <th>Id</th>
-        <th>Tên</th>
-        <th>Tiêu đề</th>
-        <th>Xoá</th>
-        <th>Sửa</th>
-        <th>Chi tiết</th>
-    </tr>
-    <tr th:each="blog, status : ${blogs}">
-        <td th:text="${status.count}"></td>
-        <td th:text="${blog.id}"></td>
-        <td th:text="${blog.author}"></td>
-        <td th:text="${blog.title}"></td>
-        <td><a th:href="@{/blog/delete(id=${blog.id})}">Xoá</a></td>
-        <td><a th:href="@{/blog/update(id=${blog.id})}">Sửa</a></td>
-        <td><a th:href="@{/blog/detail(id=${blog.id})}">Chi tiết</a></td>
-    </tr>
-</table>
-<p th:text="${create}"></p>
-<p th:text="${delete}"></p>
-<p th:text="${update}"></p>
+<div class="container mt-5">
+    <h1>Danh sách các Blog cá nhân</h1>
+
+    <form action="/blog/searchAuthor" method="post" class="container mt-4">
+        <div class="form-group row">
+            <div class="col-sm-8">
+                <input type="text" id="searchAuthor" name="searchAuthor" class="form-control" placeholder="Nhập tên tác giả">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary w-100">Tìm Kiếm</button>
+            </div>
+        </div>
+    </form><br>
+
+    <p><a href="/blog/create" class="btn btn-success mb-3">Thêm Blog</a></p>
+
+    <div th:if="${blogs == null}" class="alert alert-warning" role="alert" th:text="'Danh sách blog rỗng'"></div>
+
+    <table class="table table-bordered table-striped" th:if="${blogs != null}">
+        <thead class="table-dark">
+        <tr>
+            <th>Stt</th>
+            <th>Id</th>
+            <th>Tên</th>
+            <th>Tiêu đề</th>
+            <th>Xoá</th>
+            <th>Sửa</th>
+            <th>Chi tiết</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog, status : ${blogs}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${blog.id}"></td>
+            <td th:text="${blog.author}"></td>
+            <td th:text="${blog.title}"></td>
+            <td>
+                <a th:href="@{/blog/delete(id=${blog.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xoá</a>
+            </td>
+            <td>
+                <a th:href="@{/blog/update(id=${blog.id})}" class="btn btn-warning btn-sm">Sửa</a>
+            </td>
+            <td>
+                <a th:href="@{/blog/detail(id=${blog.id})}" class="btn btn-info btn-sm">Chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-success" th:if="${create != null}" th:text="${create}"></div>
+    <div class="alert alert-danger" th:if="${delete != null}" th:text="${delete}"></div>
+    <div class="alert alert-warning" th:if="${update != null}" th:text="${update}"></div>
+</div>
 </body>
 </html>

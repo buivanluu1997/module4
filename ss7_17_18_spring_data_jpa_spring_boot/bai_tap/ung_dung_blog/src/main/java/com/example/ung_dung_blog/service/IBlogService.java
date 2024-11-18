@@ -14,4 +14,6 @@ public interface IBlogService {
     void deleteById(Long id);
 
     void update(Blog blog);
+
+    List<Blog> findByAuthor(String author);
 }
