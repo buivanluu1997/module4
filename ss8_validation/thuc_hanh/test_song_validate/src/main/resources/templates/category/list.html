@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>danh sach thể loại bài hát</title>
+</head>
+<body>
+<h1>Danh sách các thể loại</h1>
+<table border="1">
+  <tr>
+    <th>Stt</th>
+    <th>Id</th>
+    <th>Tên thể loai</th>
+  </tr>
+  <tr th:each="category, status : ${categories}">
+    <td th:text="${status.count}"></td>
+    <td th:text="${category.id}"></td>
+    <td th:text="${category.name}"></td>
+  </tr>
+</table>
+</body>
+</html>

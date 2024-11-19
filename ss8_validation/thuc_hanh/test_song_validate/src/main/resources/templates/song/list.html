@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach bai hat</title>
+</head>
+<body>
+<h1>Danh sach bai hat</h1>
+
+<p><a href="/song/create">Them bai hat</a></p>
+<p><a href="/category">Danh sách thể loại bai hat</a></p>
+
+<form action="/song" method="get">
+    <input name="searchTitle" placeholder="Nhap ten bai hat" th:value="${searchTitle}">
+    <button type="submit">Tim Kiem</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Stt</th>
+        <th>Id</th>
+        <th>Ten bai hat</th>
+        <th>Ca si</th>
+        <th>The loai</th>
+        <th>Xoá</th>
+        <th>Sửa</th>
+    </tr>
+    <tr th:each="song, status : ${listSong}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${song.id}"></td>
+        <td th:text="${song.title}"></td>
+        <td th:text="${song.singer}"></td>
+        <td th:text="${song.getCategory().getName()}"></td>
+        <td><a th:href="@{/song/delete(id=${song.id})}" onclick="return confirm('Bạn có muốn xoá không?')">Xoá</a></td>
+        <td><a th:href="@{/song/update(id=${song.id})}" >Sửa</a></td>
+    </tr>
+</table>
+<p th:text="${detele}"></p>
+<p th:text="${update}"></p>
+<a th:if="${listSong.hasPrevious()}" th:href="@{/song(page=${listSong.number - 1},searchTitle = ${searchTitle})}">Truoc</a>
+<span th:text="${listSong.number+1}"></span>/<span th:text="${listSong.totalPages}"></span>
+<a th:if="${listSong.hasNext()}" th:href="@{/song(page=${listSong.number + 1},searchTitle = ${searchTitle})}">Sau</a>
+</body>
+</html>
