@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Sách ở thư viện</title>
+</head>
+<body>
+<h1>Danh sách Sách ở thư viện</h1>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Tên sách</th>
+        <th>Số lượng sách</th>
+        <th>Mượn sách</th>
+        <th>Trả sách</th>
+    </tr>
+    <tr th:each="book, status : ${books}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td><a th:href="@{/book/update(id=${book.id})}">Mượn sách</a></td>
+        <td><a th:href="@{/book/returnBook(id=${book.id})}">Trả sách</a></td>
+    </tr>
+</table>
+<a th:if="${books.hasPrevious()}" th:href="@{/book(page=${books.number - 1})}">Trươc</a>
+<span th:text="${books.number}"></span>/<span th:text="${books.totalPages}"></span>
+<a th:if="${books.hasNext()}" th:href="@{/book(page=${books.number + 1})}">Sau</a>
+</body>
+</html>

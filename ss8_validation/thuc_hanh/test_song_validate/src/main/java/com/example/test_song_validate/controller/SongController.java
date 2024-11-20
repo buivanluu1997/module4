@@ -56,9 +56,7 @@ public class SongController {
         if (bindingResult.hasErrors()) {
             return "/song/create";
         }
-        BeanUtils.copyProperties(songDto, song, "category");
-        Category category = categoryService.getCategoryById(songDto.getCategoryId());
-        song.setCategory(category);
+        BeanUtils.copyProperties(songDto, song);
         songService.saveSong(song);
         redirectAttributes.addFlashAttribute("add", "Đã thêm thành công");
         return "redirect:/song";

@@ -13,7 +13,7 @@
     <input th:field="*{singer}"><br>
     <small style="color: red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></small><br><br>
     <label>Thể loại:</label>
-    <select th:field="*{categoryId}">
+    <select th:field="*{category}">
         <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
     </select>
     <button>Thêm</button>
