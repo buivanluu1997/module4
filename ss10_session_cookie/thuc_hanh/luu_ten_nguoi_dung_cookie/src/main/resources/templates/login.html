@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Đăng nhập người dùng</h1>
+<form action="/do-login" method="post" th:object="${user}">
+  <label>Tên đăng nhập:</label>
+  <input name="userName" th:value="${cookieValue}"><br>
+  <label>Mật khẩu:</label>
+  <input type="password" th:field="*{password}">
+  <button type="submit">Đăng nhập</button>
+</form>
+
+<p th:text="${mess}"></p>
+</body>
+</html>

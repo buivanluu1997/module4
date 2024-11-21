@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<table border="1">
+  <tr>
+    <th>STT</th>
+    <th>Ảnh sản phẩm</th>
+    <th>Tên sản phẩm</th>
+    <th>Giá</th>
+    <th>Chi tiết</th>
+  </tr>
+  <tr th:each="product,status:${productPage}">
+    <td th:text="${status.count}"></td>
+    <td><img th:src="@{${product.urlImage}}" alt="Product Image" width="100" height="100" /></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.price} + 'VNĐ'"></td>
+    <td><a th:href="@{/product/detail(id=${product.id})}">Chi tiết</a></td>
+    <td><a th:href="@{/product/addToCard(id=${product.id})}">Thêm vào giỏ hàng</a></td>
+  </tr>
+</table>
+<a th:if="${productPage.hasPrevious()}" th:href="@{/product(page=${productPage.number - 1})}">Trước</a>
+<span th:text="${productPage.number}"></span>/<span th:text="${productPage.totalPages}"></span>
+<a th:if="${productPage.hasNext()}" th:href="@{/product(page=${productPage.number + 1})}">Sau</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+</head>
+<body>
+<h1>Giỏ hàng</h1>
+<table>
+    <tr>
+        <th>Ảnh sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá sản phẩm</th>
+        <th>Số lượng</th>
+        <th></th>
+        <th>Tổng tiền cho sản phẩm</th>
+    </tr>
+    <tr th:each="entry : ${card.productMap}">
+        <td>
+            <img th:src="${entry.key.urlImage}" alt="Product Image" width="100" height="100"/>
+        </td>
+        <td th:text="${entry.key.name}"></td>
+        <td th:text="${entry.key.price}"></td>
+        <td th:text="${entry.value}"></td>
+        <td>
+            <form action="/card/increaseQuantity" method="get">
+                <input type="hidden" name="id" th:value="${entry.key.id}" />
+                <button type="submit">+</button>
+            </form>
+            <form action="/card/decreaseQuantity" method="get">
+                <input type="hidden" name="id" th:value="${entry.key.id}" />
+                <button type="submit">-</button>
+            </form>
+        </td>
+        <td th:text="${(entry.key.price * entry.value)}+ 'VNĐ'"></td>
+    </tr>
+</table>
+
+<h3>Tổng tiền: <span th:text="${total} + 'VNĐ'"></span></h3>
+<p><a href="/product">Quay lại trang danh sách sản phẩm</a></p>
+</body>
+</html>
