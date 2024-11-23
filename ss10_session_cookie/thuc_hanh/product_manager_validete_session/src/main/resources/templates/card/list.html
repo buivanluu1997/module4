@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body class="bg-light">
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Giỏ hàng</h1>
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col" class="text-center">Ảnh sản phẩm</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col" class="text-end">Giá sản phẩm</th>
+            <th scope="col" class="text-center">Số lượng</th>
+            <th scope="col" class="text-end">Tổng tiền</th>
+            <th scope="col" class="text-center">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${card.getCard()}">
+            <td class="text-center">
+                <img th:src="${product.key.urlImage}" alt="Product Image" class="img-fluid rounded" style="width: 100px; height: 100px;">
+            </td>
+            <td th:text="${product.key.name}"></td>
+            <td class="text-end" th:text="${product.key.price} + ' VNĐ'"></td>
+            <td class="text-center" th:text="${product.value}"></td>
+            <td class="text-end" th:text="${product.key.price * product.value} + ' VNĐ'"></td>
+            <td class="text-center">
+                <div class="d-flex justify-content-center gap-2">
+                    <form action="/card/increase" method="post" class="m-0">
+                        <input type="hidden" name="id" th:value="${product.key.id}">
+                        <button type="submit" class="btn btn-sm btn-success">+</button>
+                    </form>
+                    <form action="/card/decrease" method="post" class="m-0">
+                        <input type="hidden" name="id" th:value="${product.key.id}">
+                        <button type="submit" class="btn btn-sm btn-danger">-</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-end">
+        <h4 class="fw-bold">Tổng tiền: <span th:text="${total} + ' VNĐ'"></span></h4>
+    </div>
+</div>
+<p><a href="/product">Quay lại trang chủ</a></p>
+</body>
+</html>

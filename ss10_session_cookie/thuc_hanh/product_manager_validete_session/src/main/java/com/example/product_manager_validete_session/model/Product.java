@@ -1,27 +1,26 @@
-package com.example.mo_rong_blog.model;
+package com.example.product_manager_validete_session.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
-
-@Entity
 @Setter
 @Getter
 @NoArgsConstructor
-public class Post {
+@Entity
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdAt;
-
+    private int id;
+    private String name;
+    private String description;
+    private int price;
+    private String urlImage;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+
 }

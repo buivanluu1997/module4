@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xem chi tiết sản phẩm</title>
+  <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Chi tiết sản phẩm</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-lg border-0">
+        <img th:src="${product.urlImage}" class="card-img-top rounded-top" alt="Ảnh sản phẩm">
+        <div class="card-body">
+          <h5 class="card-title text-primary fw-bold" th:text="${product.name}"></h5>
+          <p class="card-text text-muted" th:text="${product.description}"></p>
+          <p class="card-text text-success fw-bold fs-5">
+            Giá: <span th:text="${product.price}"></span> VNĐ
+          </p>
+          <div class="d-grid">
+            <a th:href="@{/product/addCard(id=${product.id})}" class="btn btn-success w-100">Thêm vào giỏ hàng</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,7 +46,7 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute("post") Post post, RedirectAttributes redirectAttributes) {
+    public String createPost(@Validated @ModelAttribute("post") Post post, RedirectAttributes redirectAttributes) {
         postService.savePost(post);
         redirectAttributes.addFlashAttribute("createPost", "Đã thêm thành công");
         return "redirect:/post";

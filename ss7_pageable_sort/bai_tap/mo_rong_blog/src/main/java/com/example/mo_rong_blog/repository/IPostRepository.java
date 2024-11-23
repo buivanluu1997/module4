@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPostRepository extends JpaRepository<Post, Long> {
     Page<Post> findByTitleContaining (String title, Pageable pageable);
+    Page<Post> findAll(Pageable pageable);
 }
