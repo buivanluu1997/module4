@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Danh sách bài hát</h1>
+<form id="form-search">
+    <input type="text" id="searchTitle" placeholder="Nhập tên bài hát">
+    <button id="btn-search">Tìm kiếm</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Tiêu đề</th>
+        <th>Ngày tạo</th>
+        <th>Tên danh mục</th>
+    </tr>
+    </thead>
+    <tbody id="result">
+    </tbody>
+</table>
+<button id="btn-loadPage">Tải trang</button>
+
+<script>
+    let currentPage = 0;
+    let searchTitle = "";
+    $(document).ready(function () {
+
+        search(currentPage, searchTitle);
+
+        $("#btn-search").click(function (event) {
+            event.preventDefault();
+            searchTitle = $("#searchTitle").val();
+            currentPage = 0;
+            search(currentPage, searchTitle);
+        })
+
+        $("#btn-loadPage").click(function () {
+            currentPage++;
+            search(currentPage, searchTitle);
+        })
+    })
+
+    function search(page, searchTitle) {
+        $.ajax({
+            contentType: "application/json",
+            method: "GET",
+            data: {page: page, searchTitle: searchTitle},
+            url: "http://localhost:8080/api/v1/posts/search",
+            success: function (data) {
+                let content = "";
+                let posts = data.content;
+
+                for (let i = 0; i < posts.length; i++) {
+                    content += `<tr>
+                                <td>${i + 1 + (page * posts.length)}</td>
+                                <td>${posts[i].title}</td>
+                                <td>${posts[i].createdAt}</td>
+                                <td>${posts[i].category.name}</td>
+                                </tr>`
+                }
+                if (page === 0) {
+                    $("#result").html(content);
+                } else {
+                    $("#result").append(content);
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

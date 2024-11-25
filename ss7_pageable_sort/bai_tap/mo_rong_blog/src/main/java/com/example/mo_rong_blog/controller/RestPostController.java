@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/posts")
 public class RestPostController {
     @Autowired
@@ -20,7 +21,7 @@ public class RestPostController {
 
     @GetMapping("")
     public ResponseEntity<Page<Post>> getPosts(@RequestParam(required = false, defaultValue = "0") int page,
-                                               @RequestParam(required = false, defaultValue = "20") int size) {
+                                               @RequestParam(required = false, defaultValue = "1") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> postPage = postService.findAll(pageable);
         if (postPage.isEmpty()) {
@@ -28,6 +29,18 @@ public class RestPostController {
         } else {
             return new ResponseEntity<>(postPage, HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Post>> searchPosts(@RequestParam(required = false, defaultValue = "0") int page,
+                                                  @RequestParam(required = false, defaultValue = "2") int size,
+                                                  @RequestParam(required = false, defaultValue = "") String searchTitle){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> postPage = postService.findByTitleContaining(searchTitle, pageable);
+        if (postPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(postPage, HttpStatus.OK);
     }
 
     @PostMapping("")

@@ -8,4 +8,5 @@ public interface IProductService {
     Page<Product> findAll(Pageable pageable);
     Product findById(int id);
     Product save(Product product);
+    void deleteById(int id);
 }
