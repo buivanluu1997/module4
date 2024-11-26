@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật sản phẩm</title>
+</head>
+<body>
+<form action="/customer/update" method="post" th:object="${customer}">
+    <h1>Cập nhật sản phẩm</h1>
+    <input type="hidden" th:field="*{id}">
+    <label>Tên khách hàng:</label>
+    <input type="text" th:field="*{name}"><br>
+    <label>Tuổi khách hàng:</label>
+    <input th:field="*{age}"><br>
+    <label>Email khách hàng:</label>
+    <input type="text" th:field="*{email}"><br>
+    <label>Loại khách hàng:</label>
+    <select th:field="*{category.id}">
+        <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+    </select>
+    <input type="submit" value="Cập nhật">
+</form>
+</body>
+</html>

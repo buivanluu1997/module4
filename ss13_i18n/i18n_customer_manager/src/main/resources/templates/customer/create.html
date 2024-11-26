@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm khách hàng</title>
+</head>
+<body>
+<form action="/customer/create" method="post" th:object="${customerDto}">
+  <h1>Thêm sản phẩm</h1>
+  <label>Tên khách hàng:</label>
+  <input th:field="*{name}"><br>
+  <small style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small><br>
+  <label>Tuổi khách hàng:</label>
+  <input th:field="*{age}"><br>
+  <small style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small><br>
+  <label>Email:</label>
+  <input th:field="*{email}"><br>
+  <small style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><br>
+  <select th:field="*{category.id}">
+    <option th:each="category:${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+  </select>
+  <input type="submit" value="Thêm">
+</form>
+</body>
+</html>
