@@ -69,6 +69,12 @@
                 } else {
                     $("#result").append(content);
                 }
+
+                if (data.last){
+                    $("#btn-loadPage").hide();
+                } else {
+                    $("#btn-loadPage").show();
+                }
             }
         })
     }
