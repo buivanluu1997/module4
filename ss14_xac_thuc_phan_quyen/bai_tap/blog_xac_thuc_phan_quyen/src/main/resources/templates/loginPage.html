@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{/_menu::mainMenu}"></th:block>
+
+<form action="/process-login" method="post">
+    <label>Tài khoản:</label>
+    <input name="username"><br>
+    <label>Mật khẩu:</label>
+    <input type="password" name="password"><br>
+    <button>Đăng nhập</button>
+</form>
+</body>
+</html>

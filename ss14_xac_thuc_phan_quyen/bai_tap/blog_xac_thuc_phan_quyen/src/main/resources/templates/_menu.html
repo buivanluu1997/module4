@@ -1,0 +1,13 @@
+<div th:fragment="mainMenu" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px; display: flex;justify-content: space-between">
+    <div>
+        <a href="/blog" style="font-family: 'Dancing Script'; color: deeppink ;font-weight: bold; font-size: x-large">Blogs</a>
+        |
+        <a href="/">Home</a>
+        |
+        <a href="/userInfo">User Info</a>
+        |
+        <!--<a sec:authorize="hasRole('ADMIN')" href="/admin">Admin| </a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/blog/create}">Post blog| </a>-->
+    </div>
+</div>

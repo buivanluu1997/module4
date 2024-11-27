@@ -20,7 +20,7 @@ public class RestCustomerController {
 
     @GetMapping("")
     public ResponseEntity<Page<Customer>> getCustomers(@RequestParam(required = false, defaultValue = "0") int page,
-                                                       @RequestParam(required = false, defaultValue = "0") int size,
+                                                       @RequestParam(required = false, defaultValue = "2") int size,
                                                        @RequestParam(required = false, defaultValue = "") String name) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Customer> customerPage = customerService.findByNameContaining(name, pageable);
@@ -54,7 +54,8 @@ public class RestCustomerController {
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        customerService.deleteById(id);
+        return new ResponseEntity<>("Đã xoá thành công",HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/{id}")
@@ -64,6 +65,7 @@ public class RestCustomerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         BeanUtils.copyProperties(customerDto, customer);
+        customer.setId(id);
         customerService.save(customer);
         return new ResponseEntity<>("Đã cập nhật thành công",HttpStatus.OK);
     }

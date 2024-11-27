@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Blog</title>
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{_menu::mainMenu}"></th:block>
+
+<form action="/blog/create" method="post">
+  <label>Tiêu đề:</label>
+  <input type="text" name="title"><br>
+  <label>Nội dung:</label>
+  <input type="text" name="content"><br>
+  <label>Link ảnh:</label>
+  <input type="text" name="urlImage"><br>
+  <button>Thêm</button>
+</form>
+</body>
+</html>
