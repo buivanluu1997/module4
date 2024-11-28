@@ -22,23 +22,24 @@
       <a sec:authorize="hasRole('ADMIN')" href="/admin">Admin| </a>
       <a sec:authorize="isAuthenticated()" th:href="@{/blog/create}">Post blog| </a>
     </div>
-  </div>
-  <div>
-    <!--        <form sec:authorize="isAuthenticated()" action="/logout" method="post">-->
-    <!--            <input type="hidden"-->
-    <!--                   th:name="${_csrf.parameterName}"-->
-    <!--                   th:value="${_csrf.token}"/>-->
-    <!--            <button>Logout</button>-->
-    <!--        </form>-->
-    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
-    <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-    |
-    <span style="color: red" sec:authorize="isAuthenticated()">
+    <div>
+      <!--        <form sec:authorize="isAuthenticated()" action="/logout" method="post">-->
+      <!--            <input type="hidden"-->
+      <!--                   th:name="${_csrf.parameterName}"-->
+      <!--                   th:value="${_csrf.token}"/>-->
+      <!--            <button>Logout</button>-->
+      <!--        </form>-->
+      <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+      <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+      |
+      <span style="color: red" sec:authorize="isAuthenticated()">
             <span sec:authentication="name"></span>
         </span>
-    <!--        <span sec:authorize="hasRole('USER')">USER visible</span>-->
-    <!--        <span sec:authorize="hasRole('ADMIN')">ADMIN visible</span>-->
+      <!--        <span sec:authorize="hasRole('USER')">USER visible</span>-->
+      <!--        <span sec:authorize="hasRole('ADMIN')">ADMIN visible</span>-->
+    </div>
   </div>
+
 </header>
 </body>
 </html>
