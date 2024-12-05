@@ -11,14 +11,18 @@
 <button id="show">Show</button>
 
 <script>
-    $(document).ready(function () {
-        $("#hide").click(function () {
-            $("p").hide();
-        });
-        $("#show").click(function () {
-            $("p").show()
-        })
-    })
+    $.ajax({
+        url: 'http://localhost:8080/api/progress/updateStatus',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(response) {
+            console.log('Cập nhật thành công!', response);
+        },
+        error: function(xhr, status, error) {
+            console.log('Có lỗi xảy ra:', error);
+        }
+    });
 </script>
 </body>
 </html>
