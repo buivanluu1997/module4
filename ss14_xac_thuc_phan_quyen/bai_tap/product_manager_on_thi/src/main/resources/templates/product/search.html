@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tìm kiêm và danh sách sản phẩm</title>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+
+<p><a href="/products/create">Thêm sản phẩm</a></p>
+
+<form action="/products" method="get" th:value="${name}">
+  <label>Tên sản phẩm:</label>
+  <input type="text" name="name">
+  <button>Tìm kiếm</button>
+</form> <br>
+
+<table border="1">
+  <tr>
+    <th>#</th>
+    <th>Tên sản phẩm</th>
+    <th>Ngày nhập sản phẩm</th>
+    <th>Hãng sản xuất</th>
+    <th>Loại sản phẩm</th>
+    <th>Giá sản phẩm</th>
+    <th>Xoá</th>
+    <th>Sửa</th>
+  </tr>
+  <tr th:each="product,status:${productPage}">
+    <td th:text="${status.count}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${#dates.format(product.createdAt, 'dd/MM/yyyy')}"></td>
+    <td th:text="${product.manufacturer}"></td>
+    <td th:text="${product.category.name}"></td>
+    <td th:text="${product.price} + ' VNĐ'"></td>
+    <td><a th:href="@{/products/delete(id=${product.id})}" onclick="return confirm('Bạn có muốn xoá không?')">Xoá</a></td>
+    <td><a th:href="@{/products/update(id=${product.id})}">Sửa</a></td>
+  </tr>
+</table>
+
+<p th:text="${create}"></p>
+
+<a th:if="${productPage.hasPrevious()}" th:href="@{/products(page = ${productPage.number - 1}, name = ${name})}">Trước</a>
+<span th:text="${productPage.number}"></span>/<span th:text="${productPage.totalPages}"></span>
+<a th:if="${productPage.hasNext()}" th:href="@{/products(page = ${productPage.number + 1}, name = ${name})}">Trước</a>
+</body>
+</html>

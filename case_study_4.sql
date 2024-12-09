@@ -1,0 +1,1 @@
+SELECT * FROM case_study_4.student;

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật sản phẩm</title>
+</head>
+<body>
+<form action="/products/update" method="post" th:object="${productDTO}">
+  <h1>Cập nhật sản phẩm</h1>
+  <input type="hidden" th:field="*{id}">
+  <label>Tên sản phẩm: </label>
+  <input th:field="*{name}"><br>
+  <small style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small><br>
+  <label>Giá sản phẩm:</label>
+  <input type="number" th:field="*{price}"><br>
+  <small style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></small><br>
+  <label>Ngày nhập:</label>
+  <input type="date" th:field="*{createdAt}"><br>
+  <label>Nhà sản xuất:</label>
+  <input th:field="*{manufacturer}"><br>
+  <small style="color: red" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></small><br>
+  <select th:field="*{category.id}">
+    <option th:each="category:${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+  </select>
+  <button>Cập nhật</button>
+</form>
+</body>
+</html>
